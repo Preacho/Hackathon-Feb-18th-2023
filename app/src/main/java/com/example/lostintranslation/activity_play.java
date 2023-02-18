@@ -34,7 +34,7 @@ public class activity_play extends AppCompatActivity {
     private void getWord() {
         Word word = new Word();
         System.out.println(word.getOriginal_word());
-        //System.out.println(word.getTransformed_word());
+        word.getTransformed_word();
         TextView mystery = findViewById(R.id.tv_cipher);
         mystery.setText(word.getOriginal_word());
     }

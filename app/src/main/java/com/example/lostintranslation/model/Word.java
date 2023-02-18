@@ -14,13 +14,15 @@ public class Word {
         return original_word;
     }
 
-    public String getTransformed_word() {
+    public void getTransformed_word() {
         // Translates word
         for(int i = 0; i < original_word.length(); i++){
-            int ascii = original_word.indexOf(i) - 65;
-            transformed_word += symbols[ascii];
+            int ascii = original_word.charAt(i)-65;
+            System.out.println(ascii);
+            //transformed_word += symbols[ascii];
+            System.out.println(transformed_word);
         }
-        return transformed_word;
+        //return transformed_word;
     }
 
 
