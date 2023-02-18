@@ -19,7 +19,7 @@ public class Word {
         for(int i = 0; i < original_word.length(); i++){
             int ascii = original_word.charAt(i)-65;
             System.out.println(ascii);
-            //transformed_word += symbols[ascii];
+            transformed_word += symbols[ascii];
             System.out.println(transformed_word);
         }
         //return transformed_word;
