@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openRules() {
-        Intent intent = new Intent(this, activity_rules.class);
+        Intent intent = new Intent(this, activity_about.class);
         startActivity(intent);
     }
 
