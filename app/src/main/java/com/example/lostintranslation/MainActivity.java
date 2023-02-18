@@ -16,10 +16,25 @@ public class MainActivity extends AppCompatActivity {
         Button settings = findViewById(R.id.bt_settings);
         Button play = findViewById(R.id.bt_play);
 
+
         rules.setOnClickListener(v-> openRules());
+        settings.setOnClickListener(v -> openSettings());
+        play.setOnClickListener(v -> openPlay());
     }
 
+    private void openPlay() {
+        Intent intent = new Intent(this, activity_play.class);
+        startActivity(intent);
+    }
+
+
     private void openRules() {
-        Intent intent = new Intent();
+        Intent intent = new Intent(this, activity_rules.class);
+        startActivity(intent);
+    }
+
+    private void openSettings() {
+        Intent intent = new Intent(this, activity_settings.class);
+        startActivity(intent);
     }
 }
