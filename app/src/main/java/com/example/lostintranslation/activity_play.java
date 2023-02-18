@@ -10,12 +10,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.lostintranslation.model.GamePlay;
+
 public class activity_play extends AppCompatActivity {
     ActionBar ab;
     private long timeleftinmillis = 60000;
     private CountDownTimer countDownTimer;
     private boolean timerrunning;
     private TextView timer;
+    private EditText answer;
+    private Button submit;
+    private GamePlay game;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +29,11 @@ public class activity_play extends AppCompatActivity {
         ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_play);
-        EditText answer = findViewById(R.id.et_answer);
-        Button submit = findViewById(R.id.bt_submit);
+
+        game = new GamePlay();
+
+        answer = (EditText) findViewById(R.id.et_answer);
+        submit = (Button) findViewById(R.id.bt_submit);
         Button key = findViewById(R.id.bt_viewKey);
         key.setOnClickListener(v-> openKey());
 
