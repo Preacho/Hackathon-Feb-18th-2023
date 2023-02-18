@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 public class activity_play extends AppCompatActivity {
     ActionBar ab;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -21,7 +22,13 @@ public class activity_play extends AppCompatActivity {
         Button submit = findViewById(R.id.bt_submit);
         Button key = findViewById(R.id.bt_viewKey);
         key.setOnClickListener(v-> openKey());
+        submit.setOnClickListener(v->checkAnswer());
 
+    }
+
+    private void checkAnswer() {
+        EditText answer = findViewById(R.id.et_answer);
+        System.out.println(answer.getText().toString());
     }
 
     private void openKey() {
