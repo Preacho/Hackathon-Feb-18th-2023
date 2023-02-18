@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.lostintranslation.model.GamePlay;
+import com.example.lostintranslation.model.Word;
 
 public class activity_play extends AppCompatActivity {
     ActionBar ab;
@@ -35,10 +36,25 @@ public class activity_play extends AppCompatActivity {
         answer = (EditText) findViewById(R.id.et_answer);
         submit = (Button) findViewById(R.id.bt_submit);
         Button key = findViewById(R.id.bt_viewKey);
-        key.setOnClickListener(v-> openKey());
 
+        getWord();
+        key.setOnClickListener(v-> openKey());
+        submit.setOnClickListener(v->checkAnswer());
         timer = (TextView) findViewById(R.id.TimeCounter);
         Timer();
+    }
+
+    private void getWord() {
+        Word word = new Word();
+        System.out.println(word.getOriginal_word());
+        //System.out.println(word.getTransformed_word());
+        TextView mystery = findViewById(R.id.tv_cipher);
+        mystery.setText(word.getOriginal_word());
+    }
+
+    private void checkAnswer() {
+        EditText answer = findViewById(R.id.et_answer);
+        System.out.println(answer.getText().toString());
     }
 
     private void openKey() {

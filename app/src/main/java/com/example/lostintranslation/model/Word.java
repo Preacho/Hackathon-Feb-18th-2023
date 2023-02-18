@@ -2,8 +2,28 @@ package com.example.lostintranslation.model;
 import java.util.Random;
 
 public class Word {
+
+
     String original_word;
+
+
+
     String transformed_word;
+
+    public String getOriginal_word() {
+        return original_word;
+    }
+
+    public String getTransformed_word() {
+        // Translates word
+        for(int i = 0; i < original_word.length(); i++){
+            int ascii = original_word.indexOf(i) - 65;
+            transformed_word += symbols[ascii];
+        }
+        return transformed_word;
+    }
+
+
 
     // Word Banks
     String[] easy = {"Car","Fun","Git","Tour",
@@ -44,15 +64,12 @@ public class Word {
             original_word = hard[hard_rand];
         }
 
-        // Translates word
-        for(int i = 0; i < original_word.length(); i++){
-            int ascii = original_word.indexOf(i) - 65;
-            transformed_word += symbols[ascii];
 
-        }
 
 
     }
+
+
 
 
 
