@@ -4,6 +4,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 
 public class activity_view_key extends AppCompatActivity {
     ActionBar ab;
@@ -13,5 +14,6 @@ public class activity_view_key extends AppCompatActivity {
         ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_view_key);
+
     }
 }
