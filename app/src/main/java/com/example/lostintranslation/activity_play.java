@@ -26,6 +26,7 @@ public class activity_play extends AppCompatActivity {
     private TextView lives;
     private Button submit;
     private GamePlay game;
+    private int difficulty;
 
     private String originalWord;
 
@@ -55,7 +56,9 @@ public class activity_play extends AppCompatActivity {
     }
 
     private void getWord() {
-        Word word = new Word();
+        difficulty = activity_settings.getDifficultyData(this);
+        System.out.println("difficulty " + difficulty);
+        Word word = new Word(difficulty);
         System.out.println(word.getOriginal_word());
         originalWord = word.getOriginal_word();
         TextView mystery = findViewById(R.id.tv_cipher);
@@ -77,6 +80,7 @@ public class activity_play extends AppCompatActivity {
             if(game.getAttempts() < 0){
 
                 Toast.makeText(this,"Game Over!",Toast.LENGTH_SHORT).show();
+                activity_settings.saveHighScore(activity_play.this,game.getScore(),difficulty);
                 finish();
             }else{
                 lives.setText(String.valueOf(game.getAttempts()));
@@ -113,6 +117,7 @@ public class activity_play extends AppCompatActivity {
             @Override
             public void onFinish() {
                 Toast.makeText(activity_play.this,"Game Over!",Toast.LENGTH_SHORT).show();
+                activity_settings.saveHighScore(activity_play.this,game.getScore(),difficulty);
                 finish();
             }
         }.start();

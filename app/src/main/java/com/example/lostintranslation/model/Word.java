@@ -29,9 +29,9 @@ public class Word {
                     "Cultivation","Amphibians"};
 
     // Translation index
-    String[] symbols = {"(!","(@","(#","($","(%","(^","(&","(*","(-","(+",
-                        "[!","[@","[#","[$","[%","[^","[&","[*","[-","[+",
-                        "{!","{@","{#","{$","{%","{^","{&","{*","{-","{+"};
+    String[] symbols = {"(! ","(@ ","(# ","($ ","(% ","(^ ","(& ","(* ","(- ","(+ ",
+                        "[! ","[@ ","[# ","[$ ","[% ","[^ ","[& ","[* ","[- ","[+ ",
+                        "{! ","{@ ","{# ","{$ ","{% ","{^ ","{& ","{* ","{- ","{+ "};
 
 
     public String getOriginal_word() {
@@ -49,7 +49,7 @@ public class Word {
     }
 
     GamePlay select = new GamePlay();
-    int current_difficulty = select.difficulty;
+    int current_difficulty;
 
     Random rand = new Random();
     int easy_rand = rand.nextInt(easy.length);
@@ -57,8 +57,9 @@ public class Word {
     int hard_rand = rand.nextInt(hard.length);
 
 
-    public Word(){
+    public Word(int difficulty){
         // Gets word randomly
+        current_difficulty = difficulty;
         if(current_difficulty == 1){
             original_word = easy[easy_rand];
         }

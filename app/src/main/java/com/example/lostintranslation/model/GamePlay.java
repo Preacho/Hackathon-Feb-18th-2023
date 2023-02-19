@@ -35,10 +35,10 @@ public class GamePlay {
         return attempts;
     }
 
-    public void setTranscribedWord(){
-        Word word = new Word();
-        selectedWord = word.transformed_word;
-    }
+//    public void setTranscribedWord(){
+//        Word word = new Word();
+//        selectedWord = word.transformed_word;
+//    }
 
 
 
