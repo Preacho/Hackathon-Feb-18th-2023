@@ -34,14 +34,13 @@ public class activity_settings extends AppCompatActivity {
         highscoretext.setText(Integer.toString(getHighScore(this,saveddifficulty)));
 
         image = findViewById(R.id.BackgroundImageView);
-        image.setImageResource(imageid[saveddifficulty-1]);
+        image.setImageResource(imageid[saveddifficulty]);
 
         createDifficultyButtons();
         resetScore();
     }
 
     private void resetScore() {
-        TextView score = findViewById(R.id.tv_high_score);
         Button button = findViewById(R.id.bt_reset);
         button.setOnClickListener( v -> {
             resetHighScoreData();
@@ -61,7 +60,7 @@ public class activity_settings extends AppCompatActivity {
             button.setText(difficulty);
             final int index = i;
             button.setOnClickListener( v->{
-                saveDifficultyData(index+1);
+                saveDifficultyData(index);
                 highscoretext.setText(Integer.toString(getHighScore(this,saveddifficulty)));
                 image.setImageResource(imageid[index]);
             });

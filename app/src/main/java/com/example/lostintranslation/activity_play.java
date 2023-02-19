@@ -1,11 +1,13 @@
 package com.example.lostintranslation;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -37,8 +39,9 @@ public class activity_play extends AppCompatActivity {
         ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_play);
+        difficulty = activity_settings.getDifficultyData(this);
 
-        game = new GamePlay();
+        game = new GamePlay(difficulty);
 
         answer = (EditText) findViewById(R.id.et_answer);
         submit = (Button) findViewById(R.id.bt_submit);
@@ -53,10 +56,13 @@ public class activity_play extends AppCompatActivity {
 
         timer = (TextView) findViewById(R.id.TimeCounter);
         Timer();
+
+        ActionBar backbar = getSupportActionBar();
+        backbar.setDisplayHomeAsUpEnabled(true);
+
     }
 
     private void getWord() {
-        difficulty = activity_settings.getDifficultyData(this);
         System.out.println("difficulty " + difficulty);
         Word word = new Word(difficulty);
         System.out.println(word.getOriginal_word());
@@ -68,12 +74,16 @@ public class activity_play extends AppCompatActivity {
     private void checkAnswer() {
         EditText answer = findViewById(R.id.et_answer);
         String response = answer.getText().toString().toLowerCase(Locale.ROOT);
-        if(response.equals(originalWord.toLowerCase(Locale.ROOT))){
+        if(response.equals("")){
+
+        }
+        else if(response.equals(originalWord.toLowerCase(Locale.ROOT))){
             answer.setText("");
             game.addScore();
             Toast.makeText(this,"Score: "+game.getScore(), Toast.LENGTH_SHORT).show();
             nextWord();
-        }else{
+        }
+        else{
             Toast.makeText(this,"incorrect "+originalWord, Toast.LENGTH_SHORT).show();
             game.reduceAttempts();
 
@@ -81,6 +91,7 @@ public class activity_play extends AppCompatActivity {
 
                 Toast.makeText(this,"Game Over!",Toast.LENGTH_SHORT).show();
                 activity_settings.saveHighScore(activity_play.this,game.getScore(),difficulty);
+                pausetimer();
                 finish();
             }else{
                 lives.setText(String.valueOf(game.getAttempts()));
@@ -133,6 +144,22 @@ public class activity_play extends AppCompatActivity {
     }
     private void resumetimer(){
         Timer();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem holder){
+        switch (holder.getItemId()){
+            case android.R.id.home:
+                pausetimer();
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(holder);
+    }
+    @Override
+    public void onBackPressed(){
+        pausetimer();
+        finish();
     }
 
 }

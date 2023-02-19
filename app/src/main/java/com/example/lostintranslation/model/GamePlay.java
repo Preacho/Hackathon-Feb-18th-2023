@@ -2,21 +2,15 @@ package com.example.lostintranslation.model;
 
 public class GamePlay {
 
-    String selectedWord;
-    int difficulty;
+    private String selectedWord;
+    private int difficulty;
+    private int score;
+    private int attempts;
 
-
-
-    int score;
-
-
-
-    int attempts;
-
-    public GamePlay(){
-        difficulty = 1;                 // Set to 1 by default
+    public GamePlay(int difficulty){
+        this.difficulty = difficulty;                 // Set to 1 by default
         score = 0;                      // Set to 0 by default
-        attempts = difficulty*2 + 1;    // Set to 3 by default
+        attempts = 7 - difficulty * 2;  // Set to 3 by default
     }
 
     public void addScore(){
