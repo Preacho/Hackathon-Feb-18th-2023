@@ -14,7 +14,7 @@ public class GamePlay {
     }
 
     public void addScore(){
-        score = 50 + difficulty*50;
+        score += 50 + difficulty*50;
     }
 
     public void reduceAttempts(){

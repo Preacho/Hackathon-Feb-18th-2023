@@ -28,6 +28,8 @@ public class activity_play extends AppCompatActivity {
     private TextView lives;
     private Button submit;
     private GamePlay game;
+    private TextView score;
+    private TextView best;
     private int difficulty;
 
     private String originalWord;
@@ -45,6 +47,7 @@ public class activity_play extends AppCompatActivity {
 
         answer = (EditText) findViewById(R.id.et_answer);
         submit = (Button) findViewById(R.id.bt_submit);
+        score = findViewById(R.id.tv_score);
         Button key = findViewById(R.id.bt_viewKey);
 
         getWord();
@@ -53,6 +56,10 @@ public class activity_play extends AppCompatActivity {
 
         lives = findViewById(R.id.Life_Counter);
         lives.setText(String.valueOf(game.getAttempts()));
+
+        best = findViewById(R.id.tv_best);
+        best.setText(String.valueOf(activity_settings.getHighScore(this,difficulty)));
+
 
         timer = (TextView) findViewById(R.id.TimeCounter);
         Timer();
@@ -80,6 +87,11 @@ public class activity_play extends AppCompatActivity {
         else if(response.equals(originalWord.toLowerCase(Locale.ROOT))){
             answer.setText("");
             game.addScore();
+            score.setText(String.valueOf(game.getScore()));
+            pausetimer();
+            timeleftinmillis+=5000;
+            resumetimer();
+
             Toast.makeText(this,"Score: "+game.getScore(), Toast.LENGTH_SHORT).show();
 
             pausetimer();
@@ -104,9 +116,12 @@ public class activity_play extends AppCompatActivity {
 
 
         }
+
         System.out.println(answer.getText().toString());
 
     }
+
+
 
     private void nextWord() {
         getWord();
