@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.MenuItem;
@@ -37,6 +38,8 @@ public class activity_play extends AppCompatActivity {
     private TextView best;
     private TextView animatescore;
     private int difficulty;
+    private MediaPlayer incorrect;
+    private MediaPlayer gameOver;
 
     private String originalWord;
 
@@ -110,6 +113,8 @@ public class activity_play extends AppCompatActivity {
         }
         else{
             //Toast.makeText(this,"incorrect", Toast.LENGTH_SHORT).show();
+            incorrect = MediaPlayer.create(this,R.raw.negative_beeps);
+            incorrect.start();
             Toast.makeText(this,"incorrect "+originalWord, Toast.LENGTH_SHORT).show();
             game.reduceAttempts();
 
@@ -130,6 +135,8 @@ public class activity_play extends AppCompatActivity {
     }
 
     private void gameOver() {
+        gameOver = MediaPlayer.create(this,R.raw.decide);
+        gameOver.start();
         game_over game_over = new game_over(score.getText().toString());
         game_over.setCancelable(false);
         game_over.show(getSupportFragmentManager(),"example dialog");
