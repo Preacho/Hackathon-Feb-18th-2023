@@ -1,11 +1,38 @@
 package com.example.lostintranslation.model;
+import java.util.Locale;
 import java.util.Random;
 
 public class Word {
 
 
     String original_word;
-    String transformed_word;
+
+
+
+    String transformed_word = "";
+
+
+
+
+
+    // Word Banks
+    String[] easy = {"Car","Fun","Git","Tour",
+                    "More","Stop","Chant","Cope",
+                    "Mouse","Over"};
+
+    String[] normal = {"Barren","Awaken","Fabric",
+                   "Hornet","Doctor","Osmosis",
+                    "Caption","Gravity","Thunder","Blizzard"};
+
+    String[] hard = {"Xenophobic","Esophagus","Hackathon",
+                    "Poliomyelitis","Xylophone","Annexation","Meningitis",
+                    "Cultivation","Amphibians"};
+
+    // Translation index
+    String[] symbols = {"(!","(@","(#","($","(%","(^","(&","(*","(-","(+",
+                        "[!","[@","[#","[$","[%","[^","[&","[*","[-","[+",
+                        "{!","{@","{#","{$","{%","{^","{&","{*","{-","{+"};
+
 
     public String getOriginal_word() {
         return original_word;
@@ -13,34 +40,15 @@ public class Word {
 
     public String getTransformed_word() {
         // Translates word
+        original_word = original_word.toLowerCase(Locale.ROOT);
         for(int i = 0; i < original_word.length(); i++){
-            int ascii = original_word.indexOf(i) - 97;
-            transformed_word += symbols[ascii];
+            int ascii = original_word.charAt(i)-97;
+            transformed_word = transformed_word+symbols[ascii];
         }
         return transformed_word;
     }
 
-
-
-    // Word Banks
-    private String[] easy = {"Car","Fun","Git","Tour",
-                    "More","Stop","Chant","Cope",
-                    "Mouse","Over"};
-
-    private String[] normal = {"Barren","Awaken","Fabric",
-                   "Hornet","Doctor","Osmosis",
-                    "Caption","Gravity","Thunder","Blizzard"};
-
-    private String[] hard = {"xenophobic","Esophagus","Hackathon",
-                    "Poliomyelitis","Xylophone","Annexation","Meningitis",
-                    "Cultivation","Amphibians"};
-
-    // Translation index
-    private String[] symbols = {"(!","(@","(#","($","(%","(^","(&","(*","(-","(+",
-                        "[!","[@","[#","[$","[%","[^","[&","[*","[-","[+",
-                        "{!","{@","{#","{$","{%","{^","{&","{*","{-","{+"};
-
-    private GamePlay select = new GamePlay();
+    GamePlay select = new GamePlay();
     int current_difficulty = select.difficulty;
 
     Random rand = new Random();
@@ -60,6 +68,10 @@ public class Word {
         else if( current_difficulty == 3){
             original_word = hard[hard_rand];
         }
+
+
+
+
     }
 
 
