@@ -61,7 +61,7 @@ public class activity_settings extends AppCompatActivity {
             final int index = i;
             button.setOnClickListener( v->{
                 saveDifficultyData(index);
-                highscoretext.setText(Integer.toString(getHighScore(this,saveddifficulty)));
+                highscoretext.setText(Integer.toString(getHighScore(this,index)));
                 image.setImageResource(imageid[index]);
             });
 

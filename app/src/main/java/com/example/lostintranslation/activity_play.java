@@ -70,9 +70,7 @@ public class activity_play extends AppCompatActivity {
     }
 
     private void getWord() {
-        System.out.println("difficulty " + difficulty);
         Word word = new Word(difficulty);
-        System.out.println(word.getOriginal_word());
         originalWord = word.getOriginal_word();
         TextView mystery = findViewById(R.id.tv_cipher);
         mystery.setText(word.getTransformed_word());
@@ -96,26 +94,31 @@ public class activity_play extends AppCompatActivity {
             nextWord();
         }
         else{
+            //Toast.makeText(this,"incorrect", Toast.LENGTH_SHORT).show();
             Toast.makeText(this,"incorrect "+originalWord, Toast.LENGTH_SHORT).show();
             game.reduceAttempts();
 
             if(game.getAttempts() < 0){
-
-                Toast.makeText(this,"Game Over!",Toast.LENGTH_SHORT).show();
-                activity_settings.saveHighScore(activity_play.this,game.getScore(),difficulty);
+                if(game.getScore() > Integer.parseInt(best.getText().toString())){
+                    activity_settings.saveHighScore(activity_play.this,game.getScore(),difficulty);
+                }
                 pausetimer();
-                finish();
+                gameOver();
+
             }else{
                 lives.setText(String.valueOf(game.getAttempts()));
             }
 
 
         }
-
-        System.out.println(answer.getText().toString());
-
     }
 
+    private void gameOver() {
+        game_over game_over = new game_over(score.getText().toString());
+        game_over.setCancelable(false);
+        game_over.show(getSupportFragmentManager(),"example dialog");
+
+    }
 
 
     private void nextWord() {
@@ -144,7 +147,7 @@ public class activity_play extends AppCompatActivity {
             public void onFinish() {
                 Toast.makeText(activity_play.this,"Game Over!",Toast.LENGTH_SHORT).show();
                 activity_settings.saveHighScore(activity_play.this,game.getScore(),difficulty);
-                finish();
+                gameOver();
             }
         }.start();
         timerrunning = true;
