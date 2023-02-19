@@ -9,9 +9,12 @@ import android.os.CountDownTimer;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.lostintranslation.model.GamePlay;
 import com.example.lostintranslation.model.Word;
+
+import java.util.Locale;
 
 public class activity_play extends AppCompatActivity {
     ActionBar ab;
@@ -20,8 +23,11 @@ public class activity_play extends AppCompatActivity {
     private boolean timerrunning;
     private TextView timer;
     private EditText answer;
+    private TextView lives;
     private Button submit;
     private GamePlay game;
+
+    private String originalWord;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +46,10 @@ public class activity_play extends AppCompatActivity {
         getWord();
         key.setOnClickListener(v-> openKey());
         submit.setOnClickListener(v->checkAnswer());
+
+        lives = findViewById(R.id.Life_Counter);
+        lives.setText(String.valueOf(game.getAttempts()));
+
         timer = (TextView) findViewById(R.id.TimeCounter);
         Timer();
     }
@@ -47,14 +57,39 @@ public class activity_play extends AppCompatActivity {
     private void getWord() {
         Word word = new Word();
         System.out.println(word.getOriginal_word());
-        word.getTransformed_word();
+        originalWord = word.getOriginal_word();
         TextView mystery = findViewById(R.id.tv_cipher);
-        mystery.setText(word.getOriginal_word());
+        mystery.setText(word.getTransformed_word());
     }
 
     private void checkAnswer() {
         EditText answer = findViewById(R.id.et_answer);
+        String response = answer.getText().toString().toLowerCase(Locale.ROOT);
+        if(response.equals(originalWord.toLowerCase(Locale.ROOT))){
+            answer.setText("");
+            game.addScore();
+            Toast.makeText(this,"Score: "+game.getScore(), Toast.LENGTH_SHORT).show();
+            nextWord();
+        }else{
+            Toast.makeText(this,"incorrect "+originalWord, Toast.LENGTH_SHORT).show();
+            game.reduceAttempts();
+
+            if(game.getAttempts() < 0){
+
+                Toast.makeText(this,"Game Over!",Toast.LENGTH_SHORT).show();
+                finish();
+            }else{
+                lives.setText(String.valueOf(game.getAttempts()));
+            }
+
+
+        }
         System.out.println(answer.getText().toString());
+
+    }
+
+    private void nextWord() {
+        getWord();
     }
 
     private void openKey() {
@@ -77,6 +112,7 @@ public class activity_play extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+                Toast.makeText(activity_play.this,"Game Over!",Toast.LENGTH_SHORT).show();
                 finish();
             }
         }.start();
