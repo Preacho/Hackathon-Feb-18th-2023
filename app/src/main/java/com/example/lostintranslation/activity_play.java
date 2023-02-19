@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,9 +22,12 @@ import java.util.Locale;
 
 public class activity_play extends AppCompatActivity {
     ActionBar ab;
-    private long timeleftinmillis = 60000;
+    private long timeleftinmillis = 61000;
+    private long animatetimer;
     private CountDownTimer countDownTimer;
+    private CountDownTimer animationTimer;
     private boolean timerrunning;
+    private boolean animaterunning;
     private TextView timer;
     private EditText answer;
     private TextView lives;
@@ -30,6 +35,7 @@ public class activity_play extends AppCompatActivity {
     private GamePlay game;
     private TextView score;
     private TextView best;
+    private TextView animatescore;
     private int difficulty;
 
     private String originalWord;
@@ -67,6 +73,9 @@ public class activity_play extends AppCompatActivity {
         ActionBar backbar = getSupportActionBar();
         backbar.setDisplayHomeAsUpEnabled(true);
 
+        animatescore = findViewById(R.id.addScore);
+
+
     }
 
     private void getWord() {
@@ -85,15 +94,16 @@ public class activity_play extends AppCompatActivity {
         else if(response.equals(originalWord.toLowerCase(Locale.ROOT))){
             answer.setText("");
             game.addScore();
+
+            animationTimer();
+            animatescore.setText("+" + Integer.toString(50+difficulty*50));
+
+            Animation animatefadein = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in);
+            animatescore.setAnimation(animatefadein);
+
             score.setText(String.valueOf(game.getScore()));
             pausetimer();
             timeleftinmillis+=5000;
-            resumetimer();
-
-            Toast.makeText(this,"Score: "+game.getScore(), Toast.LENGTH_SHORT).show();
-
-            pausetimer();
-            timeleftinmillis += 5000;
             resumetimer();
 
             nextWord();
@@ -110,7 +120,8 @@ public class activity_play extends AppCompatActivity {
                 pausetimer();
                 gameOver();
 
-            }else{
+            }
+            else{
                 lives.setText(String.valueOf(game.getAttempts()));
             }
 
@@ -159,7 +170,7 @@ public class activity_play extends AppCompatActivity {
 
     }
     private void updatetimer() {
-        int seconds = (int) timeleftinmillis/1000;
+        int seconds = (int) timeleftinmillis/1000 - 1;
         timer.setText(Integer.toString(seconds));
     }
     private void pausetimer(){
@@ -183,6 +194,25 @@ public class activity_play extends AppCompatActivity {
     public void onBackPressed(){
         pausetimer();
         finish();
+    }
+
+    private void animationTimer(){
+        animatetimer = 1000;
+        animationTimer = new CountDownTimer(animatetimer, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                animatetimer = millisUntilFinished;
+
+            }
+
+            @Override
+            public void onFinish() {
+                Animation animatefadeout = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_out);
+                animatescore.setAnimation(animatefadeout);
+
+            }
+        }.start();
+        animaterunning = true;
     }
 
 }
