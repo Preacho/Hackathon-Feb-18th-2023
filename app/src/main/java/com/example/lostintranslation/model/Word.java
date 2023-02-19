@@ -45,7 +45,7 @@ public class Word {
         return original_word;
     }
 
-    public String getTransformed_word(String original_word) {
+    public String getTransformed_word() {
         // Translates word
         this.original_word = original_word.toLowerCase(Locale.ROOT);
         for(int i = 0; i < original_word.length(); i++){

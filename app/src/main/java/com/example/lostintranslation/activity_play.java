@@ -106,7 +106,7 @@ public class activity_play extends AppCompatActivity {
             Word word = new Word(difficulty);
             originalWord = word.getOriginal_word();
 
-            mystery.setText(word.getTransformed_word(originalWord));
+            mystery.setText(word.getTransformed_word());
         }else{
             if(iterator == 5){
                 Intent intent = new Intent(this,levels.class);
