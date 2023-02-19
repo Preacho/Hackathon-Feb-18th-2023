@@ -81,6 +81,11 @@ public class activity_play extends AppCompatActivity {
             answer.setText("");
             game.addScore();
             Toast.makeText(this,"Score: "+game.getScore(), Toast.LENGTH_SHORT).show();
+
+            pausetimer();
+            timeleftinmillis += 5000;
+            resumetimer();
+
             nextWord();
         }
         else{
