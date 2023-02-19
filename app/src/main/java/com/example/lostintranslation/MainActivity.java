@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,10 +22,11 @@ public class MainActivity extends AppCompatActivity {
     private boolean timerun;
     private CountDownTimer countDownTimer;
     private TextView chartextview;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
         Button rules = findViewById(R.id.bt_rules);
         Button settings = findViewById(R.id.bt_settings);
         Button play = findViewById(R.id.bt_play);
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTick(long untilFinished) {
                 timer = untilFinished;
                 if(timer%97 == 0){
-                updatechartext();}
+                    updatechartext();}
 
             }
 
@@ -94,6 +96,6 @@ public class MainActivity extends AppCompatActivity {
             chartextview.setText(Character.toString((char)randomint));
 
         }
-    }
 
+    }
 }
