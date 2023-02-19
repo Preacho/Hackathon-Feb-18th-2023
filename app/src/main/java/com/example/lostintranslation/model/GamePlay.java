@@ -8,7 +8,7 @@ public class GamePlay {
     private int attempts;
 
     public GamePlay(int difficulty){
-        this.difficulty = difficulty;                 // Set to 1 by default
+        this.difficulty = difficulty;   // Set to 1 by default
         score = 0;                      // Set to 0 by default
         attempts = 7 - difficulty * 2;  // Set to 3 by default
     }
@@ -29,10 +29,7 @@ public class GamePlay {
         return attempts;
     }
 
-//    public void setTranscribedWord(){
-//        Word word = new Word();
-//        selectedWord = word.transformed_word;
-//    }
+
 
 
 
