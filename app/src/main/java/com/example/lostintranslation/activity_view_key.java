@@ -10,12 +10,14 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class activity_view_key extends AppCompatActivity {
     ActionBar ab;
     private long sentovertimer;
     private boolean boltimer;
     private CountDownTimer timer;
+    private TextView texttime;
 
     public static Intent getIntent(Context context, int timer){
         Intent intent = new Intent(context, activity_view_key.class);
@@ -24,7 +26,7 @@ public class activity_view_key extends AppCompatActivity {
     }
     private void getDataFromIntent(){
         Intent intent = getIntent();
-        sentovertimer = intent.getIntExtra("SENDOVERTIMER", 0);
+        sentovertimer = (long)intent.getIntExtra("SENDOVERTIMER", 0) - 1000;
     }
 
     @Override
@@ -34,8 +36,11 @@ public class activity_view_key extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_view_key);
         getDataFromIntent();
+        texttime = findViewById(R.id.keytimer);
+        texttime.setText(Integer.toString((int)sentovertimer/1000));
         ActionBar backBar = getSupportActionBar();
         backBar.setDisplayHomeAsUpEnabled(true);
+        Timer();
 
     }
     public boolean onOptionsItemSelected(@NonNull MenuItem holder){
@@ -52,11 +57,13 @@ public class activity_view_key extends AppCompatActivity {
             @Override
             public void onTick(long millisUntilFinished) {
                 sentovertimer = millisUntilFinished;
-
+                int seconds = (int) sentovertimer/1000 - 1;
+                texttime.setText(Integer.toString(seconds));
             }
 
             @Override
             public void onFinish() {
+                timer.cancel();
                 finish();
             }
         }.start();
