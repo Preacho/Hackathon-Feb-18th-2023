@@ -35,7 +35,7 @@
         android:id="@+id/Rules"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="24dp"
         android:text="Rules"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,10 +45,10 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="350dp"
-        android:layout_height="149dp"
+        android:layout_width="359dp"
+        android:layout_height="220dp"
         android:layout_marginTop="8dp"
-        android:text="- Players are given a word that has been transformed\n- Players must turn the words back into the original \n- Based on the difficulty, a player is awarded points for solving the word\n- Players have a limited amount of lives and everytime they guess wrong, they lose a life\n- There is a timer. Try and solve as many words before the timer runs out\n - A table below will help you transform the encrypted word back to normal   "
+        android:text="Words have been encrypted! You must transform it back to its original form\n- Players are given a word that has been transformed\n- Players must turn the words back into the original \n- Based on the difficulty, a player is awarded points for solving the word\n- Players have a limited amount of lives and everytime they guess wrong, they lose a life\n- There is a timer. Try and solve as many words before the timer runs out\n - A table below will help you transform the encrypted word back to normal   "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.721"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,8 +60,10 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintVertical_bias="0.477"
         tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

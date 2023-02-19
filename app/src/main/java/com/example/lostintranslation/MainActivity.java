@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
-
+    private ImageView image;
+    private int[] imageid = {R.drawable.play, R.drawable.gear, R.drawable.question};
+    private int[] imageviews = {R.id.playImageView,R.id.gearImageView, R.id.questionImageView};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +23,12 @@ public class MainActivity extends AppCompatActivity {
         rules.setOnClickListener(v-> openRules());
         settings.setOnClickListener(v -> openSettings());
         play.setOnClickListener(v -> openPlay());
+
+        for(int i = 0; i < 3; i++){
+            image = findViewById(imageviews[i]);
+            image.setImageResource(imageid[i]);
+        }
+
     }
 
     private void openPlay() {

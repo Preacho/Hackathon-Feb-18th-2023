@@ -5,31 +5,24 @@ import java.util.Random;
 public class Word {
 
 
-    String original_word;
-
-
-
-    String transformed_word = "";
-
-
-
-
+    private String original_word;
+    private String transformed_word = "";
 
     // Word Banks
-    String[] easy = {"Car","Fun","Git","Tour",
+    private String[] easy = {"Car","Fun","Git","Tour",
                     "More","Stop","Chant","Cope",
                     "Mouse","Over"};
 
-    String[] normal = {"Barren","Awaken","Fabric",
+    private String[] normal = {"Barren","Awaken","Fabric",
                    "Hornet","Doctor","Osmosis",
                     "Caption","Gravity","Thunder","Blizzard"};
 
-    String[] hard = {"Xenophobic","Esophagus","Hackathon",
+    private String[] hard = {"Xenophobic","Esophagus","Hackathon",
                     "Poliomyelitis","Xylophone","Annexation","Meningitis",
-                    "Cultivation","Amphibians"};
+                    "Cultivation","Amphibians", "Organization"};
 
     // Translation index
-    String[] symbols = {"(! ","(@ ","(# ","($ ","(% ","(^ ","(& ","(* ","(- ","(+ ",
+    private String[] symbols = {"(! ","(@ ","(# ","($ ","(% ","(^ ","(& ","(* ","(- ","(+ ",
                         "[! ","[@ ","[# ","[$ ","[% ","[^ ","[& ","[* ","[- ","[+ ",
                         "{! ","{@ ","{# ","{$ ","{% ","{^ ","{& ","{* ","{- ","{+ "};
 
@@ -48,31 +41,20 @@ public class Word {
         return transformed_word;
     }
 
-    GamePlay select = new GamePlay();
-    int current_difficulty;
-
-    Random rand = new Random();
-    int easy_rand = rand.nextInt(easy.length);
-    int normal_rand = rand.nextInt(normal.length);
-    int hard_rand = rand.nextInt(hard.length);
-
-
     public Word(int difficulty){
         // Gets word randomly
-        current_difficulty = difficulty;
+        Random rand = new Random();
+        int randomint = rand.nextInt(easy.length);
+        int current_difficulty = difficulty+1;
         if(current_difficulty == 1){
-            original_word = easy[easy_rand];
+            original_word = easy[randomint];
         }
         else if (current_difficulty == 2) {
-            original_word = normal[normal_rand];
+            original_word = normal[randomint];
         }
         else if( current_difficulty == 3){
-            original_word = hard[hard_rand];
+            original_word = hard[randomint];
         }
-
-
-
-
     }
 
 
