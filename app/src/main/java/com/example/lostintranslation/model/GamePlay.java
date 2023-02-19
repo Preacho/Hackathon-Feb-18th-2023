@@ -4,7 +4,13 @@ public class GamePlay {
 
     String selectedWord;
     int difficulty;
+
+
+
     int score;
+
+
+
     int attempts;
 
     public GamePlay(){
@@ -21,10 +27,18 @@ public class GamePlay {
         attempts = attempts - 1;
     }
 
-    public void setTranscribedWord(){
-        Word word = new Word();
-        selectedWord = word.transformed_word;
+    public int getScore() {
+        return score;
     }
+
+    public int getAttempts() {
+        return attempts;
+    }
+
+//    public void setTranscribedWord(){
+//        Word word = new Word();
+//        selectedWord = word.transformed_word;
+//    }
 
 
 

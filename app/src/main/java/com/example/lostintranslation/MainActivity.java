@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openPlay() {
+        //System.out.println(activity_settings.getDifficultyData(this));
         Intent intent = new Intent(this, activity_play.class);
         startActivity(intent);
     }

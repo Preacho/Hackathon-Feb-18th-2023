@@ -1,4 +1,5 @@
 package com.example.lostintranslation.model;
+import java.util.Locale;
 import java.util.Random;
 
 public class Word {
@@ -8,22 +9,9 @@ public class Word {
 
 
 
-    String transformed_word;
+    String transformed_word = "";
 
-    public String getOriginal_word() {
-        return original_word;
-    }
 
-    public void getTransformed_word() {
-        // Translates word
-        for(int i = 0; i < original_word.length(); i++){
-            int ascii = original_word.charAt(i)-65;
-            System.out.println(ascii);
-            transformed_word += symbols[ascii];
-            System.out.println(transformed_word);
-        }
-        //return transformed_word;
-    }
 
 
 
@@ -41,12 +29,27 @@ public class Word {
                     "Cultivation","Amphibians"};
 
     // Translation index
-    String[] symbols = {"(!","(@","(#","($","(%","(^","(&","(*","(-","(+",
-                        "[!","[@","[#","[$","[%","[^","[&","[*","[-","[+",
-                        "{!","{@","{#","{$","{%","{^","{&","{*","{-","{+"};
+    String[] symbols = {"(! ","(@ ","(# ","($ ","(% ","(^ ","(& ","(* ","(- ","(+ ",
+                        "[! ","[@ ","[# ","[$ ","[% ","[^ ","[& ","[* ","[- ","[+ ",
+                        "{! ","{@ ","{# ","{$ ","{% ","{^ ","{& ","{* ","{- ","{+ "};
+
+
+    public String getOriginal_word() {
+        return original_word;
+    }
+
+    public String getTransformed_word() {
+        // Translates word
+        original_word = original_word.toLowerCase(Locale.ROOT);
+        for(int i = 0; i < original_word.length(); i++){
+            int ascii = original_word.charAt(i)-97;
+            transformed_word = transformed_word+symbols[ascii];
+        }
+        return transformed_word;
+    }
 
     GamePlay select = new GamePlay();
-    int current_difficulty = select.difficulty;
+    int current_difficulty;
 
     Random rand = new Random();
     int easy_rand = rand.nextInt(easy.length);
@@ -54,8 +57,9 @@ public class Word {
     int hard_rand = rand.nextInt(hard.length);
 
 
-    public Word(){
+    public Word(int difficulty){
         // Gets word randomly
+        current_difficulty = difficulty;
         if(current_difficulty == 1){
             original_word = easy[easy_rand];
         }
