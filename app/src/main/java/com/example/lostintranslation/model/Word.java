@@ -18,7 +18,7 @@ public class Word {
                     "Caption","Gravity","Thunder","Blizzard"};
 
     private String[] hard = {"Xenophobic","Esophagus","Hackathon",
-                    "Poliomyelitis","Xylophone","Annexation","Meningitis",
+                    "Poliomyelitis","Xylophone","Annexation","",
                     "Cultivation","Amphibians", "Organization"};
 
     // Translation index

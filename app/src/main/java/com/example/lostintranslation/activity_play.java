@@ -152,8 +152,8 @@ public class activity_play extends AppCompatActivity {
     }
 
     private void openKey() {
-        Intent intent = new Intent(this, activity_view_key.class);
         pausetimer();
+        Intent intent = activity_view_key.getIntent(this, (int)timeleftinmillis);
         startActivity(intent);
         resumetimer();
 
