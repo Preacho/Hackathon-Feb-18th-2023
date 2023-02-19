@@ -41,6 +41,9 @@ public class activity_play extends AppCompatActivity {
     private MediaPlayer incorrect;
     private MediaPlayer correct;
     private MediaPlayer gameOver;
+    private int level;
+    private int iterator;
+    private String[] levelSet;
 
     private String originalWord;
 
@@ -53,8 +56,19 @@ public class activity_play extends AppCompatActivity {
         setContentView(R.layout.activity_play);
         difficulty = activity_settings.getDifficultyData(this);
 
-        game = new GamePlay(difficulty);
 
+        Intent intent = getIntent();
+        level = intent.getIntExtra("position",-1);
+
+        game = new GamePlay(difficulty);
+        if(level != -1){
+            Word levelwords = new Word(5);
+            levelSet = levelwords.getLevel(level);
+
+            game.setSelectedLevel(levelwords.getLevel(level));
+            iterator = 0;
+
+        }
         answer = (EditText) findViewById(R.id.et_answer);
         submit = (Button) findViewById(R.id.bt_submit);
         score = findViewById(R.id.tv_score);
@@ -80,13 +94,47 @@ public class activity_play extends AppCompatActivity {
         animatescore = findViewById(R.id.addScore);
 
 
+
+    }
+
+    private void levelGame() {
     }
 
     private void getWord() {
-        Word word = new Word(difficulty);
-        originalWord = word.getOriginal_word();
         TextView mystery = findViewById(R.id.tv_cipher);
-        mystery.setText(word.getTransformed_word());
+        if(level ==-1){
+            Word word = new Word(difficulty);
+            originalWord = word.getOriginal_word();
+
+            mystery.setText(word.getTransformed_word(originalWord));
+        }else{
+            if(iterator == 5){
+                Intent intent = new Intent(this,levels.class);
+                startActivity(intent);
+                finish();
+            }else{
+                originalWord = levelSet[iterator];
+                mystery.setText(transformWord());
+                iterator++;
+
+            }
+
+
+        }
+
+    }
+    private String transformWord(){
+        String[] symbols = {"(! ","(@ ","(# ","($ ","(% ","(^ ","(& ","(* ","(- ","(+ ",
+                "[! ","[@ ","[# ","[$ ","[% ","[^ ","[& ","[* ","[- ","[+ ",
+                "{! ","{@ ","{# ","{$ ","{% ","{^ ","{& ","{* ","{- ","{+ "};
+
+        String transformed_word = "";
+        String original_Word = originalWord.toLowerCase(Locale.ROOT);
+        for(int i = 0; i < original_Word.length(); i++){
+            int ascii = original_Word.charAt(i)-97;
+            transformed_word = transformed_word+symbols[ascii];
+        }
+        return transformed_word;
     }
 
     private void checkAnswer() {
@@ -115,10 +163,10 @@ public class activity_play extends AppCompatActivity {
             nextWord();
         }
         else{
-            //Toast.makeText(this,"incorrect", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"incorrect", Toast.LENGTH_SHORT).show();
             incorrect = MediaPlayer.create(this,R.raw.negative_beeps);
             incorrect.start();
-            Toast.makeText(this,"incorrect "+originalWord, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this,"incorrect "+originalWord, Toast.LENGTH_SHORT).show();
             game.reduceAttempts();
 
             if(game.getAttempts() < 0){

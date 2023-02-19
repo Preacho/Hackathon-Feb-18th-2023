@@ -3,6 +3,7 @@ package com.example.lostintranslation.model;
 public class GamePlay {
 
     private String selectedWord;
+    private String[] selectedLevel;
     private int difficulty;
     private int score;
     private int attempts;
@@ -27,6 +28,14 @@ public class GamePlay {
 
     public int getAttempts() {
         return attempts;
+    }
+
+    public String[] getSelectedLevel() {
+        return selectedLevel;
+    }
+
+    public void setSelectedLevel(String[] selectedLevel) {
+        this.selectedLevel = selectedLevel;
     }
 
 

@@ -28,11 +28,13 @@ public class MainActivity extends AppCompatActivity {
         Button rules = findViewById(R.id.bt_rules);
         Button settings = findViewById(R.id.bt_settings);
         Button play = findViewById(R.id.bt_play);
+        Button levels = findViewById(R.id.bt_levels);
 
 
         rules.setOnClickListener(v-> openRules());
         settings.setOnClickListener(v -> openSettings());
         play.setOnClickListener(v -> openPlay());
+        levels.setOnClickListener(v->openLevels());
 
         for(int i = 0; i < 3; i++){
             image = findViewById(imageviews[i]);
@@ -43,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
+
     @Override
     protected void onResume(){
         super.onResume();
@@ -86,6 +91,14 @@ public class MainActivity extends AppCompatActivity {
         countDownTimer.cancel();
         startActivity(intent);
     }
+
+    private void openLevels() {
+        Intent intent = new Intent(this, levels.class);
+        countDownTimer.cancel();
+        startActivity(intent);
+    }
+
+
     private void updatechartext(){
         for(int i = 0; i < 4; i++){
             Random rand = new Random();
@@ -95,5 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
+
 
 }

@@ -21,19 +21,33 @@ public class Word {
                     "Poliomyelitis","Xylophone","Annexation","Meningitis",
                     "Cultivation","Amphibians", "Organization"};
 
+
+
+    private String[][] levels = {
+            {"Car","Fun","Git","Tour","Osmosis"},
+            {"More","Stop","Caption","Gravity","Thunder"},
+            {"Barren","Awaken","Fabric","Xenophobic","Esophagus"},
+            {"Chant","Blizzard","Annexation","Meningitis","Amphibians"},
+            {"Cultivation", "Organization","Xenophobic","Hackathon","Poliomyelitis"}
+
+    };
+
     // Translation index
     private String[] symbols = {"(! ","(@ ","(# ","($ ","(% ","(^ ","(& ","(* ","(- ","(+ ",
                         "[! ","[@ ","[# ","[$ ","[% ","[^ ","[& ","[* ","[- ","[+ ",
                         "{! ","{@ ","{# ","{$ ","{% ","{^ ","{& ","{* ","{- ","{+ "};
 
 
+    public String[] getLevel(int i){
+        return levels[i];
+    }
     public String getOriginal_word() {
         return original_word;
     }
 
-    public String getTransformed_word() {
+    public String getTransformed_word(String original_word) {
         // Translates word
-        original_word = original_word.toLowerCase(Locale.ROOT);
+        this.original_word = original_word.toLowerCase(Locale.ROOT);
         for(int i = 0; i < original_word.length(); i++){
             int ascii = original_word.charAt(i)-97;
             transformed_word = transformed_word+symbols[ascii];
@@ -54,7 +68,10 @@ public class Word {
         }
         else if( current_difficulty == 3){
             original_word = hard[randomint];
+        }else if(current_difficulty == 5){
+
         }
+
     }
 
 
