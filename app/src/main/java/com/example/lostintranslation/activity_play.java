@@ -39,6 +39,7 @@ public class activity_play extends AppCompatActivity {
     private TextView animatescore;
     private int difficulty;
     private MediaPlayer incorrect;
+    private MediaPlayer correct;
     private MediaPlayer gameOver;
 
     private String originalWord;
@@ -95,6 +96,8 @@ public class activity_play extends AppCompatActivity {
 
         }
         else if(response.equals(originalWord.toLowerCase(Locale.ROOT))){
+            correct = MediaPlayer.create(this,R.raw.correct);
+            correct.start();
             answer.setText("");
             game.addScore();
 
