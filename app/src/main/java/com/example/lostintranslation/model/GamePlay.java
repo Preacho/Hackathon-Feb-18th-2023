@@ -18,7 +18,7 @@ public class GamePlay {
     }
 
     public void reduceAttempts(){
-        attempts = attempts - 1;
+        attempts--;
     }
 
     public int getScore() {
